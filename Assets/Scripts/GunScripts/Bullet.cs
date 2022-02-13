@@ -30,20 +30,21 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.tag == "Enemy")
         {
-            collision.collider.transform.root.GetComponent<EnemyController>().TakeDamage();
             bulletCollider.enabled = false;
-            Instantiate(blood,transform.position,transform.rotation);
-           GameObject dirt = Instantiate(hole,transform.position,transform.rotation);
+            collision.collider.transform.root.GetComponent<EnemyController>().TakeDamage();
+            GameObject bloodGO = Instantiate(blood, transform.position, transform.rotation);
+            GameObject dirt = Instantiate(hole, transform.position, transform.rotation);
             dirt.transform.parent = collision.collider.transform;
             dirt.transform.LookAt(Camera.main.transform);
-            Destroy(dirt,5);
+            Destroy(dirt, 5);
+            Destroy(bloodGO, 5);
         }
         else
         {
-            GameObject dirt = Instantiate(hole,transform.position,transform.rotation);
+            GameObject dirt = Instantiate(hole, transform.position, transform.rotation);
             dirt.transform.parent = collision.collider.transform;
             dirt.transform.LookAt(Camera.main.transform);
-            Destroy(dirt,5);
+            Destroy(dirt, 5);
         }
     }
     IEnumerator SleepBullet()
